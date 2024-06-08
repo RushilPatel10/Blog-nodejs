@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOZZY Blogs</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .movie-card:hover .edit-delete-buttons {
+      opacity: 1;
+    }
+
+    .edit-delete-buttons {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white">
+
+  <!-- Header -->
+  <header class="bg-gray-700 p-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://vozzy.tmrwstudio.net/content/images/2024/02/vozzy.svg" alt="Logo"
+        class="w-40 h-15">
+      <h1 class="text-2xl font-bold"></h1>
+    </div>
+    <div class="flex items-center space-x-4">
+
+      <button class="bg-blue-600 p-2 rounded">Sign up</button>
+      <button class="bg-blue-600 p-2 rounded">Sign in</button>
+    </div>
+  </header>
+
+  <!-- Main layout -->
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="w-1/5 bg-gray-700 p-4 h-screen">
+      <!-- Sidebar items -->
+      <ul class="space-y-4">
+        <li><a href="/" class="p-2 hover:bg-gray-600 rounded cursor-pointer">Home</a></li>
+        <li class="p-2 hover:bg-gray-600 rounded cursor-pointer">Search</li>
+        <li class="p-2 hover:bg-gray-600 rounded cursor-pointer">Watchlist</li>
+        <li class="p-2 hover:bg-gray-600 rounded cursor-pointer">Settings</li>
+        <li><a href="/add_movie" class="p-2 hover:bg-gray-700 rounded cursor-pointer">Add Blog</a></li>
+      </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="w-4/5 p-4">
+      <!-- Featured show -->
+      <!-- <div class="flex items-center space-x-4 mb-8">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiKtCvF4ANjPgX8MagkgJkxJPklem9kor6Kw&s"
+          alt="The Terminal List" class="w-1/4 rounded">
+        <div>
+          <h1 class="text-3xl font-bold">John Wick</h1>
+          <p class="text-lg mt-1">John Wick is an American neo-noir action film series and media franchise created by Derek
+            Kolstad.</p>
+          <p class="mt-1">Included with Prime</p>
+        </div>
+      </div> -->
+
+      <!-- Top shows -->
+      <h2 class="text-2xl font-semibold mb-4"> Top 10 Blogs</h2>
+      <div class="grid grid-cols-3 gap-4">
+        <% movieData.map((movie)=>{ %>
+          <div class="bg-gray-800 p-4 rounded relative movie-card">
+            <img src="<%= movie.image %>" alt="Show 1" class="w-full mb-2 rounded">
+            <h3 class="text-lg font-semibold">
+              <%= movie.name %>
+            </h3>
+            <p>
+              <%= movie.disc %>
+            </p>
+            
+            <div class="mt-2 inset-0 flex items-center justify-center space-x-2 ">
+              <a href="/edit_movie?id=<%= movie.id %>"
+                class="bg-yellow-500 text-white py-1 px-2 text-center rounded bg-indigo-600 w-1/2">Edit</a>
+              <a href="/deletemovie?id=<%= movie.id %>"
+                class="bg-red-500 text-white text-center py-1 px-2 rounded bg-red-600 w-1/2">Delete</a>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
