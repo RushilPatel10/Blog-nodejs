@@ -18,7 +18,7 @@ let movieid;
 const home = async (req, res) => {
   try {
     let data = await movieSchema.find();
-    return res.render("index", { movieData: data });
+    return res.render("index", { movieData: data, user: req.cookies.user });
   } catch (error) {
     console.log(error);
   }
@@ -36,8 +36,8 @@ const addmovie = async (req, res) => {
 };
 
 const updatemovie = async (req, res) => {
-    console.log(req.query);
-    const {id} = req.query
+  console.log(req.query);
+  const { id } = req.query
   let data = req.body;
   if (req.file) {
     data.image = req.file.path;
@@ -68,7 +68,7 @@ const deletemovie = async (req, res) => {
 };
 
 const add_movie = async (req, res) => {
-  return res.render("addMovie");
+  return res.render("addMovie", { user: req.cookies.user });
 };
 
 const edit_movie = async (req, res) => {
@@ -79,11 +79,35 @@ const edit_movie = async (req, res) => {
   try {
     const data = await movieSchema.findById(id);
     console.log(data);
-    return res.render("editMovie", { editdata: data });
+    return res.render("editMovie", { editdata: data, user: req.cookies.user });
   } catch (error) {
     console.log(error);
   }
 };
+
+const login = (req, res) => {
+  const { username, password } = req.body;
+  if (username === 'admin' && password === '123') {
+    res.cookie('user', username, { httpOnly: true });
+    res.redirect('/');
+  } else {
+    res.status(401).send('Unauthorized');
+  }
+};
+
+const logout = (req, res) => {
+  res.clearCookie('user');
+  res.redirect('/login');
+};
+
+const checkAuth = (req, res, next) => {
+  if (req.cookies.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
 
 module.exports = {
   home,
@@ -93,4 +117,7 @@ module.exports = {
   deletemovie,
   addmovie,
   updatemovie,
+  login,
+  logout,
+  checkAuth,
 };

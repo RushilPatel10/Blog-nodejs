@@ -7,17 +7,23 @@ const {
   uploadImage,
   addmovie,
   updatemovie,
+  login,
+  logout,
+  checkAuth,
 } = require("../controller/movie.controller");
 
 const router = Router();
 
-router.get("/", home);
-router.get("/add_movie", add_movie);
-router.get("/edit_movie", edit_movie);
-router.get("/deletemovie", deletemovie);
+router.get("/", checkAuth, home);
+router.get("/add_movie", checkAuth, add_movie);
+router.get("/edit_movie", checkAuth, edit_movie);
+router.get("/deletemovie", checkAuth, deletemovie);
+router.post("/addmovie", checkAuth, uploadImage, addmovie);
+router.post("/edit_movie", checkAuth, uploadImage, updatemovie);
 
+router.get('/login', (req, res) => res.render('login'));
+router.post('/login', login);
+router.get('/logout', logout);
 
-router.post("/addmovie", uploadImage, addmovie);
-router.post("/edit_movie",uploadImage, updatemovie);
 
 module.exports = router

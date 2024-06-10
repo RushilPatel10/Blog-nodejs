@@ -23,14 +23,13 @@
   <!-- Header -->
   <header class="bg-gray-700 p-4 flex items-center justify-between">
     <div class="flex items-center space-x-4">
-      <img src="https://vozzy.tmrwstudio.net/content/images/2024/02/vozzy.svg" alt="Logo"
-        class="w-40 h-15">
+      <img src="https://vozzy.tmrwstudio.net/content/images/2024/02/vozzy.svg" alt="Logo" class="w-40 h-15">
       <h1 class="text-2xl font-bold"></h1>
     </div>
     <div class="flex items-center space-x-4">
 
-      <button class="bg-blue-600 p-2 rounded">Sign up</button>
-      <button class="bg-blue-600 p-2 rounded">Sign in</button>
+      <button class="bg-blue-600 p-2 rounded"><a href="./login.ejs">Sign up</a></button>
+      <button class="bg-blue-600 p-2 rounded"><a href="./login.ejs">Sign in</a></button>
     </div>
   </header>
 
@@ -74,7 +73,7 @@
             <p>
               <%= movie.disc %>
             </p>
-            
+
             <div class="mt-2 inset-0 flex items-center justify-center space-x-2 ">
               <a href="/edit_movie?id=<%= movie.id %>"
                 class="bg-yellow-500 text-white py-1 px-2 text-center rounded bg-indigo-600 w-1/2">Edit</a>
